@@ -34,7 +34,7 @@ export class AuthController {
   async login(
     @Body('email') email: string,
     @Body('password') password: string,
-    @Res() response: Response
+    @Res({ passthrough: true }) response: Response
   ) {
     const user = await this.userService.findOne({ email })
     if (!user) {
@@ -57,5 +57,13 @@ export class AuthController {
     const cookie = request.cookies['jwt']
     const data = await this.jwtService.verifyAsync(cookie)
     return this.userService.findOne({ id: data['id'] })
+  }
+
+  @Post('logout')
+  async logout(@Res({ passthrough: true }) response: Response) {
+    response.clearCookie('jwt')
+    return {
+      message: 'success'
+    }
   }
 }
