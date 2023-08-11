@@ -1,10 +1,12 @@
-import { BadRequestException, Body, Controller, Get, NotFoundException, Post, Req, Res } from '@nestjs/common';
+import { BadRequestException, Body, ClassSerializerInterceptor, Controller, Get, NotFoundException, Post, Req, Res, UseInterceptors } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { RegisterDto } from './models/register.dto';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
+import { AuthInterceptor } from './auth/auth.interceptor';
 
+@UseInterceptors(ClassSerializerInterceptor)
 @Controller()
 export class AuthController {
   constructor(
@@ -48,6 +50,7 @@ export class AuthController {
 
     return user
   }
+
 
   @Get('user')
   async user(@Req() request: Request) {
