@@ -1,7 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { OrderItem } from "./order-item.entity";
 
-@Entity()
+@Entity('orders')
 export class Order {
   @PrimaryGeneratedColumn()
   id: number
