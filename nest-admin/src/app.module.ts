@@ -25,6 +25,6 @@ import { ProductModule } from './product/product.module';
     RoleModule,
     PermissionModule,
     ProductModule
-  ]
+  ],
 })
 export class AppModule { }
